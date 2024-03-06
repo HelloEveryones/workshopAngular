@@ -5,21 +5,20 @@ import { Theme } from './types/theme';
 import { Post } from './types/post';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiserviceService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  getThemes(){
-    const {apiUrl} = environment;
+  getThemes() {
+    const { apiUrl } = environment;
     return this.http.get<Theme[]>(`${apiUrl}/themes`);
   }
-  getPosts(limit?:number ){
-    const{apiUrl}=environment;
-    let url=`${apiUrl}/posts`
-    if(limit){
-      url+= `?limit${limit}`
+  getPosts(limit?: number) {
+    const { apiUrl } = environment;
+    let url = `${apiUrl}/posts`;
+    if (limit) {
+      url += `?limit=${limit}`;
     }
     return this.http.get<Post[]>(url);
   }
