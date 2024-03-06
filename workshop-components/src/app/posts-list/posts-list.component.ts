@@ -8,13 +8,14 @@ import { Post } from '../types/post';
   styleUrls: ['./posts-list.component.css'],
 })
 export class PostsListComponent implements OnInit {
-  posts:Post []=[]
+  posts:Post []=[];
+  isLoading:boolean = true;
   constructor(private api: ApiserviceService) {}
   ngOnInit(): void {
     this.api.getPosts(5).subscribe((posts) => {
       this.posts=posts
       console.log(posts);
-      
+      this.isLoading=false;
     });
   }
 }

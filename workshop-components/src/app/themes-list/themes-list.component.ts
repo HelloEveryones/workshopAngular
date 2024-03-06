@@ -5,16 +5,17 @@ import { Theme } from '../types/theme';
 @Component({
   selector: 'app-themes-list',
   templateUrl: './themes-list.component.html',
-  styleUrls: ['./themes-list.component.css']
+  styleUrls: ['./themes-list.component.css'],
 })
-export class ThemesListComponent implements OnInit{
-  themes:Theme[]=[];
-constructor(private api:ApiserviceService){}
-ngOnInit(): void {
-  this.api.getThemes().subscribe(themes=>{
-    this.themes=themes;
-    console.log(themes);
-    
-  })
-}
+export class ThemesListComponent implements OnInit {
+  themes: Theme[] | null = [];
+  isLoading: boolean = true;
+  constructor(private api: ApiserviceService) {}
+  ngOnInit(): void {
+    this.api.getThemes().subscribe((themes) => {
+      this.themes = themes;
+      console.log(themes);
+      this.isLoading = false;
+    });
+  }
 }
